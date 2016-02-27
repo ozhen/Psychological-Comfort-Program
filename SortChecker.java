@@ -1,9 +1,9 @@
-package cmpt213_hw3;
+
 
 public class SortChecker {
 	
 		
-	public boolean check(int[] arr){
+	public boolean check(String[] arr){
 		boolean isSorted = true;
 		int k= 1;
 		
@@ -11,7 +11,7 @@ public class SortChecker {
 			if(k == arr.length)
 				break;
 			
-			else if( arr[i] > arr[k]){
+			else if( arr[i].compareTo(arr[k]) > 0){
 				isSorted = false;
 				break;
 			}

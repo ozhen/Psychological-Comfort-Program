@@ -1,12 +1,12 @@
-package cmpt213_hw3;
+
 
 import java.util.Arrays;
 
 public class Sort {
 
-	public void merge(int[] data, int first, int last)
+	public void merge(String[] data, int first, int last)
 	{
-		int[] temp = new int[last - first + 1];	// A new array to hold the merged result
+		String[] temp = new String[last - first + 1];	// A new array to hold the merged result
 		int mid = (first + last) / 2;
 		int i = first, j = mid + 1, k = 0;
 		
@@ -14,7 +14,8 @@ public class Sort {
 		// of the subarrays is exhausted
 		while (i <= mid && j <= last)
 		{
-			if (data[i] < data[j])
+			//if (data[i] < data[j])
+			if(data[i].compareTo(data[j]) < 0)
 				temp[k++] = data[i++];
 			else
 				temp[k++] = data[j++];
@@ -33,7 +34,7 @@ public class Sort {
 			data[i] = temp[i - first];
 	}
 	
-	public void mergeSort(int[] data, int first, int last)
+	public void mergeSort(String[] data, int first, int last)
 	{
 		
 		if (first >= last)
