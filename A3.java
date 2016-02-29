@@ -37,13 +37,13 @@ public class A3 {
 		//main
 		while(i < 1){
 			dr.Greeting();
-			pat.Reply(log);
+			final long start = pat.Reply(log);
 		
 			if(pat.response.equals("no") == true){
 				i++;
 			}
 			else{
-				dr.replyPatient(pat.resList,log);	
+				dr.replyPatient(pat.resList,log,start);	
 			}
 		}
 		

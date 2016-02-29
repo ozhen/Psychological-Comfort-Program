@@ -21,12 +21,13 @@ public class Doctor {
 	 * call class Patterns
 	 * check if the response contains any of the patterns
 	 */
-	public void replyPatient(String[] words, PrintWriter log) throws FileNotFoundException{
+	public void replyPatient(String[] words, PrintWriter log, long start) throws FileNotFoundException{
 		
 		Patterns pa = new Patterns();
 		BinarySearch bs = new BinarySearch();
 		Sort st = new Sort();
 		SortChecker sck = new SortChecker();
+		Timer tm = new Timer();
 		
 		boolean isSorted = false;
 		boolean isMatched = false;
@@ -48,7 +49,8 @@ public class Doctor {
 				idxList[i] = bs.Search(pList, words[i]);
 			}
 			
-			Arrays.sort(idxList); // sort the index array
+			st.mergeSort(idxList, 0, idxList.length -1); // sort the index array
+			
 			
 			int a = 0;
 			while(a < idxList.length){
@@ -69,15 +71,19 @@ public class Doctor {
 					a++;
 				}
 			}// end while loop	
-			System.out.println(" ");
-			log.println(" ");
+			
 		}// end if(isSorted)
-		
 		if(isMatched == false){
-			System.out.println("random");
-			log.print("random");
+			System.out.println("Good to know. Good to know");
+			log.println("Good to know. Good to know");
 		}
 		
+		final long end = tm.endTimer();
+		final long total =tm.totalTime(start, end);
+		System.out.println("Total execution time: " + total + "ms.");
+		log.println("Total execution time: " + total + "ms.");
+		System.out.println(" ");
+		log.println(" ");
 		//log.close();
 	}
 }
