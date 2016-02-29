@@ -1,8 +1,10 @@
+package cmpt213_hw3;
+
 
 
 public class SortChecker {
 	
-		
+	
 	public boolean check(String[] arr){
 		boolean isSorted = true;
 		int k= 1;
@@ -20,4 +22,5 @@ public class SortChecker {
 		
 		return isSorted;
 	}
+	
 }

@@ -1,3 +1,4 @@
+package cmpt213_hw3;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -6,7 +7,12 @@ public class Patterns {
 
 	int numPatterns, numResponses;
 	int cnt = 0;
-	
+	/*
+	 * 1.Scan 'hw3_patterns.txt'
+	 * 2.Store in patternList
+	 * 3.Scan 'hw3_responses.txt'
+	 * 4.Store in responsesList
+	 */
 	public String[] getPatterns()throws FileNotFoundException{
 		
 		File PatternsFile = new File("hw3_patterns.txt");
@@ -46,13 +52,3 @@ public class Patterns {
 		return responsesList;
 	}
 }
-
-
-/*while (scan.hasNext())
-{
-	String str	= scan.nextLine();
-	//System.out.println(str);
-	patternList[] = str;
-	cnt++;
-}
-*/

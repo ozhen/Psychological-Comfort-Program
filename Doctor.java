@@ -1,105 +1,109 @@
+package cmpt213_hw3;
+
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.Arrays;
 
 public class Doctor {
-	int cnt =0;
 	
+	//counter that uses for response after greeting
+	int cnt =0;
 	public void Greeting(){
 		//response to the patient
 		if(cnt == 1){
 			System.out.println("Is there anything else?");
 		}
 		else{
-		System.out.println("Hello there, what can I help you with today?");
-		cnt = 1;
+			System.out.println("Hello there, what can I help you with today?");
+			cnt = 1;
 		}
 	}
 	
 	//passing words spilted from Patient's response
 	/*
-	 * call class Patterns
-	 * check if the response contains any of the patterns
+	 * 1.Sort the lists
+	 * 2.Check if they are sorted
+	 * 3.Create a int array to hold the indexes that match
+	 * 4.Print out those matched ones by using the int array
 	 */
-	public void replyPatient(String[] words, PrintWriter log, long start) throws FileNotFoundException{
+	public void replyPatient(String[] words, PrintWriter log) throws FileNotFoundException{
 		
+		//Create class objects
 		Patterns pa = new Patterns();
 		BinarySearch bs = new BinarySearch();
 		Sort st = new Sort();
 		SortChecker sck = new SortChecker();
-		Timer tm = new Timer();
+		//Timer tm = new Timer();
 		
-		boolean isSorted = false;
+		boolean ispListSorted = false;
+		boolean isrListSorted = false;
 		boolean isMatched = false;
 		
 		String[] pList = pa.getPatterns();
 		String[] rList = pa.getDocResponse();
-		st.mergeSort(pList, 0, pList.length -1);
-		st.mergeSort(rList, 0, rList.length -1);
 		
-		isSorted = sck.check(pList);
+		st.sortStr(pList);
+		st.sortStr(rList);
+	
+		ispListSorted = sck.check(pList);
+		isrListSorted = sck.check(rList);
 		
-		if(isSorted == false )
-			System.out.println("list is not sorted");
+		if(ispListSorted == false || isrListSorted == false )
+			
+				System.out.println("List is not sorted");
 		else{
 			//idxList is use to store the index
 			int[] idxList = new int[words.length];
 			
 			for(int i = 0; i < words.length; i++){
-				idxList[i] = bs.Search(pList, words[i]);
+				//Using the library
+				idxList[i] = bs.searchString(pList, words[i]);
 			}
 			
-			st.mergeSort(idxList, 0, idxList.length -1); // sort the index array
-			
+			//sort the index array 
+			st.sortI(idxList);
 			
 			int a = 0;
 			while(a < idxList.length){
-				if(idxList[a] == -1){
+				
+				//when commands do not contain patterns
+				if(idxList[a] < 0){
 					isMatched = false;
 					a++;
 				}
 				else{
 					isMatched = true;
-					log.println(" ");
-					log.println("The word: '" + pList[idxList[a]] + "' matches with the pattern list.");
+					
+					//print the matched pattern in Log.txt file
+					
+						log.println(" ");
+						log.println("The word: '" + pList[idxList[a]] + "' matches with the pattern list.");
+					
 					String temp = rList[idxList[a]];
 					String[] data = temp.split("-");
 					
-					System.out.println(data[1]);	//2.3.6 print out the response corresponding 
-					log.println(data[1]);			//to the pattern
+						System.out.println(data[1]);	//2.3.6 print out the response corresponding 
+						log.println(data[1]);			//to the pattern
 					
 					a++;
 				}
 			}// end while loop	
 			
 		}// end if(isSorted)
+		
 		if(isMatched == false){
-			System.out.println("Good to know. Good to know");
-			log.println("Good to know. Good to know");
+			//default messages based on the length of the command
+			if(words.length % 2 == 0){
+				System.out.println("Good to know. Good to know");
+				log.println("Good to know. Good to know");
+			}
+			else{
+				System.out.println("Do not worry about it. It is all good");
+				log.println("Do not worry about it. It is all good");
+			}
+			
 		}
 		
-		final long end = tm.endTimer();
-		final long total =tm.totalTime(start, end);
-		System.out.println("Total execution time: " + total + "ms.");
-		log.println("Total execution time: " + total + "ms.");
-		System.out.println(" ");
-		log.println(" ");
-		//log.close();
 	}
+		//log.close();
 }
 
-/*Check if pattern list and response list are sorted  */
-//System.out.println(Arrays.toString(pList));
-//System.out.println(Arrays.toString(rList));
-
-/*
-//check the index array
-System.out.println(Arrays.toString(idxList)); 
-Arrays.sort(idxList);
-System.out.println(Arrays.toString(idxList));
-*/
-
-/*
-for(int i = 0; i < words.length; i++)
-	System.out.println("list " + i + " is " + words[i]);
-	*/

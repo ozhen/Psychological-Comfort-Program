@@ -1,21 +1,16 @@
+package cmpt213_hw3;
 
+import java.util.Arrays;
 
 public class BinarySearch {
-
-	public int Search(String[] arr, String target)
-	{
-		int	first = 0, last = arr.length - 1;
-		
-		while (first <= last)
-		{
-			int mid = (first + last) / 2;
-			if (target.compareTo(arr[mid]) == 0) 
-				return mid;
-			else if (target.compareTo(arr[mid]) > 0)
-				first = mid + 1;
-			else
-				last = mid - 1;
-		}
-		return -1;
+	
+	
+	public int searchString(String[] arr, String target){
+		return Arrays.binarySearch(arr, target);
 	}
+	
+	public int searchInt(int[] arr, int target){
+		return Arrays.binarySearch(arr, target);
+	}
+	
 }

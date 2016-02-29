@@ -1,3 +1,5 @@
+package cmpt213_hw3;
+
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -9,8 +11,7 @@ public class Patient {
 	
 	public long Reply(PrintWriter log){
 		Timer tm = new Timer();
-		
-		
+	
 		Scanner scan = new Scanner(System.in);
 		response = scan.nextLine();
 		final long start = tm.startTimer();
